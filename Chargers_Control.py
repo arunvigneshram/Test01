@@ -41,7 +41,7 @@ def start_charging(charger_id, charger_ip, port, rfid, rfid_user_id):
     mycursor_status.execute(sql)
 
 
-def stop_charging(charger_id, charger_ip, port, charger_current_state):
+def stop_charging(charger_id, charger_ip, port, session_id, charger_current_state):
     # Stop Charging Request
     requests.put(
         f"http://{charger_ip}:{port}/stop_charging", json={})
