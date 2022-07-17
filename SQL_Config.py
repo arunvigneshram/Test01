@@ -1,7 +1,7 @@
 import mysql.connector
 
 db_config = {"host": "localhost",
-             "user": "evchargers", "password": "evchargers123"}
+             "user": "evchargers", "password": "EVchargers123!!"}
 
 # Setup of the mysql connector to the wallbox_config database
 mydb_config = mysql.connector.connect(
