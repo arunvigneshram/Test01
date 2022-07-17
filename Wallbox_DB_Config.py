@@ -27,7 +27,7 @@ mycursor.execute(sql)
 sql = """
     INSERT INTO User_Data (user_name, user_rfid, verified)
     VALUES
-        ('Elias', '04:60:B5:72:3B:74:81', 0)
+        ('Elias', '04:44:35:72:3B:74:81', 0)
     """
 mycursor.execute(sql)
 
