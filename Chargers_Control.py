@@ -62,6 +62,9 @@ def stop_charging(charger_id, charger_ip, port, charger_current_state):
         energy_abs_stop = {energy_abs_stop},
     """
     mycursor_status.execute(sql)
+    
+    # Set the charging time and the energy consumed
+    mycursor_status.execute("SELECT charging_start_time, energy_stat
 
     # Error stop and other stop variation
     status = "STOPPED"
@@ -131,5 +134,4 @@ while True:
 
                 # Stop Charging Process
             if charger_current_state == "ERROR":
-                stop_charging(charger_id, charger_ip, port,
-                              rfid, rfid_user_id, charger_current_state)
+                stop_charging(charger_id, charger_ip, port, session_id, charger_current_state)
