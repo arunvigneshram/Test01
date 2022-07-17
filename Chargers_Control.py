@@ -53,6 +53,17 @@ def stop_charging(charger_id, charger_ip, port, session_id, charger_current_stat
 
     # Note the utc time
     charging_stop_time = datetime.utcnow().strftime("%H:%M:%S")
+    
+    # Set the charging time and the energy consumed
+    mycursor_status.execute(f"SELECT charging_start_time, energy_abs_start FROM Charging_Session WHERE session_id = {session_id}")
+    myresult = mycursor.fetchall()
+    charging_start_time = myresult[0][0]
+    energy_abs_start = myresult[0][1]
+    
+    FMT = "%H:%M:%S"
+    charging_time = datetime.strptime(charging_stop_time, FMT) - datetime.strptime(charging_start_time, FMT)
+    print(charging_time)
+    energy_consumed = energy_abs_start - energy_abs_stop
 
     # Log the start session into the Chargers_Start_Stop table in wallbox_status database
     sql = f"""
@@ -63,9 +74,6 @@ def stop_charging(charger_id, charger_ip, port, session_id, charger_current_stat
     """
     mycursor_status.execute(sql)
     
-    # Set the charging time and the energy consumed
-    mycursor_status.execute("SELECT charging_start_time, energy_stat
-
     # Error stop and other stop variation
     status = "STOPPED"
     if charger_current_state == "ERROR":
